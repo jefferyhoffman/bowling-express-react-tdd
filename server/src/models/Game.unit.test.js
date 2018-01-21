@@ -36,11 +36,22 @@ describe("Game", () => {
   });
   
   describe("when there is a simple spare", () => {
-    it("should calculate the correct bonus", () => {
+    it("should calculate the correct score", () => {
       g.add(3);
       g.add(7);
       g.add(3);
       expect(g.scoreForFrame(1)).toBe(13);
+    });
+  });
+  
+  describe("when there is a simple frame after a spare", () => {
+    it("should calculate the correct score", () => {
+      g.add(3);
+      g.add(7);
+      g.add(3);
+      g.add(2);
+      expect(g.scoreForFrame(1)).toBe(13);
+      expect(g.score()).toBe(18);
     });
   });
 });
