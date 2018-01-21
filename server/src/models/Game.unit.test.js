@@ -5,9 +5,12 @@ import Game from "./Game";
 describe("Game", () => {
   let g;
   
+  beforeEach(() => {
+    g = new Game();
+  });
+  
   describe("when there have been two throws and no mark", () => {
     it("should calculate the correct score", () => {
-      g = new Game();
       g.add(5);
       g.add(4);
       expect(g.score()).toBe(9);
@@ -16,7 +19,6 @@ describe("Game", () => {
   
   describe("when there are four throws and no marks", () => {
     beforeEach(() => {
-      g = new Game();
       g.add(5);
       g.add(4);
       g.add(7);
