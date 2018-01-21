@@ -20,8 +20,15 @@ class Game {
     for (let currentFrame = 0; currentFrame < frame; currentFrame++) {
       const firstThrow = this._throws[ball++];
       const secondThrow = this._throws[ball++];
-      score += firstThrow + secondThrow;
+      
+      let frameScore = firstThrow + secondThrow;
+      if (frameScore === 10) {
+        score += frameScore + this._throws[ball++];
+      } else {
+        score += frameScore;
+      }
     }
+    
     return score;
   }
 }
