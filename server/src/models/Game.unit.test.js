@@ -34,4 +34,13 @@ describe("Game", () => {
       expect(g.scoreForFrame(2)).toBe(18);
     });
   });
+  
+  describe("when there is a simple spare", () => {
+    it("should calculate the correct bonus", () => {
+      g.add(3);
+      g.add(7);
+      g.add(3);
+      expect(g.scoreForFrame(1)).toBe(13);
+    });
+  });
 });
