@@ -54,4 +54,14 @@ describe("Game", () => {
       expect(g.score()).toBe(18);
     });
   });
+  
+  describe("when there is a simple strike", () => {
+    it("should calculate the correct score", () => {
+      g.add(10);
+      g.add(3);
+      g.add(6);
+      expect(g.scoreForFrame(1)).toBe(19);
+      expect(g.score()).toBe(28);
+    });
+  });
 });
