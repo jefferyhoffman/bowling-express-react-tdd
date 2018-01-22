@@ -64,4 +64,38 @@ describe("Game", () => {
       expect(g.score()).toBe(28);
     });
   });
+  
+  describe("when there is a perfect game", () => {
+    it("should calculate the correct score", () => {
+      for (let i = 0; i < 12; i++) {
+        g.add(10);
+      }
+      expect(g.score()).toBe(300);
+    });
+  });
+  
+  describe("when an example game is simulated", () => {
+    it("should calculate the correct score", () => {
+      g.add(1);
+      g.add(4);
+      g.add(4);
+      g.add(5);
+      g.add(6);
+      g.add(4);
+      g.add(5);
+      g.add(5);
+      g.add(10);
+      g.add(0);
+      g.add(1);
+      g.add(7);
+      g.add(3);
+      g.add(6);
+      g.add(4);
+      g.add(10);
+      g.add(2);
+      g.add(8);
+      g.add(6);
+      expect(g.score()).toBe(133);
+    });
+  });
 });

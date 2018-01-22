@@ -22,6 +22,7 @@ class Game {
       this._firstThrowInFrame = true;
       this._currentFrame++;
     }
+    this._currentFrame = Math.min(10, this._currentFrame);
   }
   
   score() {
