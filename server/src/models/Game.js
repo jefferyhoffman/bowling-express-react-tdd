@@ -9,15 +9,18 @@ class Game {
   add(pins) {
     this._throws[this._currentThrow++] = pins;
     this._score += pins;
-    this.adjustCurrentFrame();
+    this.adjustCurrentFrame(pins);
   }
   
-  adjustCurrentFrame() {
+  adjustCurrentFrame(pins) {
     if (this._firstThrowInFrame) {
-      this._firstThrowInFrame = false;
-      this._currentFrame++;
+      if (pins === 10) // strike
+        this._currentFrame++;
+      else
+        this._firstThrowInFrame = false;
     } else {
       this._firstThrowInFrame = true;
+      this._currentFrame++;
     }
   }
   
@@ -30,13 +33,16 @@ class Game {
     let score = 0;
     for (let currentFrame = 0; currentFrame < frame; currentFrame++) {
       const firstThrow = this._throws[ball++];
-      const secondThrow = this._throws[ball++];
-      
-      let frameScore = firstThrow + secondThrow;
-      if (frameScore === 10) {
-        score += frameScore + this._throws[ball];
+      if (firstThrow === 10) {
+        score += 10 + this._throws[ball] + this._throws[ball + 1];
       } else {
-        score += frameScore;
+        const secondThrow = this._throws[ball++];
+        
+        let frameScore = firstThrow + secondThrow;
+        if (frameScore === 10)
+          score += frameScore + this._throws[ball];
+        else
+          score += frameScore;
       }
     }
     
