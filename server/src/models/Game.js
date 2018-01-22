@@ -1,17 +1,28 @@
 class Game {
   constructor() {
-    this._score = 0;
     this._throws = Array(21).fill(0);
     this._currentThrow = 0;
+    this._firstThrowInFrame = true;
+    this._currentFrame = 0;
   }
   
   add(pins) {
     this._throws[this._currentThrow++] = pins;
     this._score += pins;
+    this.adjustCurrentFrame();
+  }
+  
+  adjustCurrentFrame() {
+    if (this._firstThrowInFrame) {
+      this._firstThrowInFrame = false;
+      this._currentFrame++;
+    } else {
+      this._firstThrowInFrame = true;
+    }
   }
   
   score() {
-    return this._score;
+    return this.scoreForFrame(this._currentFrame);
   }
   
   scoreForFrame(frame) {
@@ -23,7 +34,7 @@ class Game {
       
       let frameScore = firstThrow + secondThrow;
       if (frameScore === 10) {
-        score += frameScore + this._throws[ball++];
+        score += frameScore + this._throws[ball];
       } else {
         score += frameScore;
       }
